@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Slim 3</title>
+        <!--<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>-->
+        <link href='style/emby-playlist-app.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <header>
+            <div>
+                <nav>
+                
+                </nav>
+            </div>
+        </header>
+
+        <div id="body">
+            <div>
+                <h1>Slim</h1>
+                <div>a microframework for PHP</div>
+
+                <?php if (isset($name)) : ?>
+                    <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
+                <?php else: ?>
+                    <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
+                <?php endif; ?>
+
+                <?php if (isset($location)) : ?>
+                    <h3><?= htmlspecialchars($location); ?></h3>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <footer>
+            <div>
+            
+            </div>
+        </footer>
+    </body>
+</html>
