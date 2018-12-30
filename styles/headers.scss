@@ -1,0 +1,16 @@
+@import "_vars";
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+	font-family: $headerFontFamily;
+}
+h1 {
+	font-size: $headerSize1;
+}
+h2 {
+	font-size: $headerSize2;
+}
+h3 {
+	font-size: $headerSize3;
+}
+/* END Headers */

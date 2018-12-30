@@ -1,0 +1,70 @@
+@mixin buttons($text-color: black, $foreground-color: blue, $background-color: white, $timing-function: ease) {
+	a.button, button, input[type=submit] {
+		display: inline-block;
+		padding: 0.5em; 
+		color: $text-color;
+		text-decoration: none;
+	 
+		&.low-emphasis  { @include button-low-emphasis($text-color, $foreground-color, $background-color, $timing-function); }
+		&.mid-emphasis   { @include button-mid-emphasis($text-color, $foreground-color, $background-color, $timing-function); }
+		&.high-emphasis { @include button-high-emphasis($foreground-color, $background-color, $timing-function); }
+	}
+}
+
+@mixin button-low-emphasis($text-color: black, $foreground-color: blue, $background-color: white, $timing-function: ease) {
+	border: none;
+	background: $background-color;
+	color: $text-color;
+	
+	transition-property: color;
+	transition-duration: 0.5s;
+	transition-timing-function: $timing-function;
+	
+	&:hover, &:focus {
+		color: $foreground-color;
+	}
+	
+	&:active {
+		
+	}
+}
+
+@mixin button-mid-emphasis($text-color: black, $foreground-color: blue, $background-color: white, $timing-function: ease) {
+	color: $text-color;
+	border: 1px solid $text-color;
+	background: transparent;
+	
+	transition-property: color, border, background;
+	transition-duration: 0.5s;
+	transition-timing-function: $timing-function;
+	
+	&:hover, &:focus {
+		color: $background-color;
+		border: 1px solid $foreground-color;
+		background: $foreground-color;
+	}
+	
+	&:active {
+		
+	}
+}
+
+@mixin button-high-emphasis($foreground-color: blue, $background-color: white, $timing-function: ease) {
+	padding: 3px 8px;
+	color: $background-color;
+	border: 1px solid $foreground-color;
+	background: $foreground-color;
+	
+	transition-property: border, background;
+	transition-duration: 0.5s;
+	transition-timing-function: $timing-function;
+	
+	&:hover, &:focus {
+		border: 1px solid darken($foreground-color, 10%);
+		background: darken($foreground-color, 10%);
+	}
+	
+	&:active {
+		
+	}
+}

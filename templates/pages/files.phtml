@@ -1,0 +1,33 @@
+<div>
+    <a class="back" href="<?php echo $homeUrl; ?>">back...</a>
+</div>
+
+<h1>Library</h1>
+
+<?php if(!$isRoot): ?>
+<div>
+    <a href="?<?php echo http_build_query(['path' => array_slice($path, 0, count($path) - 1)]); ?>">Back</a>
+</div>
+<?php endif; ?>
+
+<?php if($contents['directories']): ?>
+<h2>Folders</h2>
+<ul class="filelist">
+    <?php foreach($contents['directories'] as $dirName): ?>
+    <li><a href="?<?php echo http_build_query(['path' => array_merge($path, [$dirName])]); ?>"><?php echo $dirName; ?></a></li>
+    <?php endforeach; ?>
+</ul>
+<?php else: ?>
+<h2>No Child Folders</h2>
+<?php endif; ?>
+
+<?php if($contents['files']): ?>
+<h2>Files</h2>
+<ul class="filelist">
+    <?php foreach($contents['files'] as $fileName): ?>
+    <li><?php echo $fileName; ?></li>
+    <?php endforeach; ?>
+</ul>
+<?php else: ?>
+<h2>No Files</h2>
+<?php endif; ?>

@@ -20,6 +20,9 @@ return [
             'level' => \Monolog\Logger::DEBUG,
         ],
 
+        'applicationRoot' => getenv('APPLICATION_ROOT_URL'),
         'libraryBase' => getenv('LIBRARY'),
+        'playlistRoot' => getenv('PLAYLISTS'),
+        'userId' => getenv('USER_ID'),
     ],
 ];

@@ -1,0 +1,18 @@
+<?php
+
+?>
+<div>
+    <a class="back" href="<?php echo $homeUrl; ?>">back...</a>
+</div>
+
+<h1>Playlists</h1>
+
+<div>
+    <a class="button mid-emphasis" href="<?php echo $homeUrl; ?>/playlists/edit?name=">Create New</a>
+</div>
+
+<ul>
+    <?php foreach($listNames as $listName): ?>
+    <li><a href="<?php echo $homeUrl; ?>/playlists/edit?name=<?php echo $listName; ?>"><?php echo $listName; ?></a></li>
+    <?php endforeach; ?>
+</ul>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Item>
+  <Added>1/12/2017 9:52:27 PM</Added>
+  <LockData>false</LockData>
+  <LocalTitle>test</LocalTitle>
+  <RunningTime>3</RunningTime>
+  <PlaylistItems>
+	    
+	</PlaylistItems>
+  <Shares>
+    <Share>
+      <UserId>821c7eaf511e4d05afeb833bfb10244c</UserId>
+      <CanEdit>true</CanEdit>
+    </Share>
+  </Shares>
+  <PlaylistMediaType>Audio</PlaylistMediaType>
+</Item>

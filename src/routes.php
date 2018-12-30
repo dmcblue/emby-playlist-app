@@ -2,8 +2,10 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use EmbyPlaylistApp\Playlist;
-use EmbyPlaylistApp\PlaylistQuery;
+use EmbyPlaylistApp\FileSystem;
+use EmbyPlaylistApp\PlaylistFile;
+use EmbyPlaylistApp\Models\Playlist;
+use EmbyPlaylistApp\Models\PlaylistQuery;
 
 function listToObject(Playlist $playlist) {
 	return [
@@ -14,28 +16,13 @@ function listToObject(Playlist $playlist) {
 
 // Routes
 
-$app->get('/', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
+require('routes/pages.php');
 
-    $args['location'] = $this->get('settings')['libraryBase'];
+require('routes/api.php');
 
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
-});
 
-$app->get('/test', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/test' route");
 
-    $queryResults = PlaylistQuery::create()->find();
-    $playlists = [];
-	foreach($queryResults as $result){
-		$playlists[] = listToObject($result);
-	}
-    
-    return $response->withJson($playlists);
-});
+
 /*
 $app->get('/[{name}]', function (Request $request, Response $response, array $args) {
     // Sample log message

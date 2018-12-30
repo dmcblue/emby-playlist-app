@@ -3,7 +3,46 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: $defaultFontFamily;
     font-size: 1rem;
     font-weight: 400;
     color: $textColor;
+}
+
+ul, ol {
+    margin-left: 2rem;
+}
+
+#content > div > div {
+    margin-bottom: 1em;
+}
+
+#home-page {
+    > div {
+        margin-top: 2em;
+        text-align: center;
+
+        > a {
+            font-size: $headerSize2;
+        }
+    }
+}
+
+ul.filelist {
+    list-style: none;
+    margin-left: 1em;
+    @include noselect();
+
+    li {
+        border-bottom: 1px solid $textColorDeemphasize;
+        padding: 0.5em 1em;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &.checked {
+            background: $highlightAreaColor;
+        }
+    }
 }

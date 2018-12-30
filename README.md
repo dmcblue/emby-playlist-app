@@ -6,3 +6,9 @@ Web app you can locally host on the same server as your Emby setup to more easil
 "./vendor/bin/propel" migrate
 "./vendor/bin/propel" sql:build
 "./vendor/bin/propel" model:build
+
+composer dump-autoload
+
+## .ENV
+Windows
+C:\\Users\\userName\\AppData\\Roaming\\Emby-Server\\data\\playlists

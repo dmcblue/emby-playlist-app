@@ -41,6 +41,6 @@
         "propel:build" : ["propel sql:build && propel model:build && composer dump-autoload"],
         "build:styles" : ["php styles/build.php"],
         "start": "php -S localhost:8080 -t public",
-        "test": "phpunit"
+        "test": "phpunit --bootstrap vendor/autoload.php tests/Unit"
     }
 }

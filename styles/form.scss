@@ -1,0 +1,24 @@
+@import "_vars";
+
+input[type=text],
+textarea,
+select {
+    padding: 0.25em 0.5em;
+
+    background:none;
+    border: none;
+    border-bottom: 1px solid $textColorDeemphasize;
+    transition-property: border;
+    transition-duration: $transitionDuration;
+    transition-timing-function: $transitionTimingFunction;
+
+    &:focus {
+        border-bottom: 1px solid $brandColor;
+    }
+}
+
+form {
+    > div {
+        margin-bottom: 0.5em;
+    }
+}

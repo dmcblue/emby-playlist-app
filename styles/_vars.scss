@@ -1,1 +1,27 @@
-$textColor: green;
+$textColor: white;
+$textColorDeemphasize: rgba(255, 255, 255, 0.87);
+
+$brandColor: rgb(82, 181, 75);
+$backgroundColor: rgb(32, 33, 36);
+$highlightAreaColor: rgba(255, 255, 255, 0.1);
+$headerBackground: rgb(49, 50, 53);
+
+$defaultFontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headerFontFamily: "Krona One", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$headerSize1: 2.4rem;
+$headerSize2: 1.6rem;
+$headerSize3: 1.2rem;
+
+$transitionDuration: 0.5s;
+$transitionTimingFunction: ease;
+
+@mixin noselect() {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}

@@ -1,41 +1,96 @@
-<!DOCTYPE html>
+<?php
+    use EmbyPlaylistApp\PlaylistFile;
+
+    $appTitle = "Emby Playlist App";
+    $description = "An app to help create playlists for Emby servers";
+    $title = isset($title) ? $title . ' | ' . $appTitle : $appTitle;
+    $homeUrl = getenv('APPLICATION_ROOT_URL');
+
+    $listNames = PlaylistFile::getPlaylistNames(getenv('PLAYLISTS'));
+
+    $template = 'home';
+    switch(isset($page) ? $page : false) {
+        case 'files': $template = 'files';break;
+        case 'playlists': $template = 'playlists';break;
+        case 'playlistEditor': $template = 'playlist_edit';break;
+        case 'error': $template = '404';break;
+        default:;
+    }
+?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Slim 3</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $description; ?>">
+        <meta name="author" content="<?php echo $appTitle; ?>">
+        
+        <!-- Open Graph -->
+        <meta property="og:site_name" content="<?php echo $title; ?>"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="<?php echo $title; ?>"/>
+        <meta property="og:description" content="<?php echo $description; ?>"/>
+        <meta property="og:locale" content="en-GB"/>
+        <meta property="og:url" content="<?php echo $homeUrl; ?>"/>
+        <meta property="og:image" content="<?php echo $homeUrl; ?>/images/logo2.png"/>
+        <meta property="og:image:secure_url" content="<?php echo $homeUrl; ?>/images/logo2.png"/>
+        
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:description" content="<?php echo $description; ?>" />
+        <meta name="twitter:title" content="<?php echo $homeUrl; ?>" />
+        <meta name="twitter:site" content="@embyapp" />
+        <meta name="twitter:image" content="<?php echo $homeUrl; ?>/images/logo2.png" />
+        <meta name="twitter:creator" content="@dmcblue" />
+        <!-- Google JSON-LD -->
+        <script type='application/ld+json'><?php echo json_encode([
+            '@context' =>  'http://schema.org',
+            '@type' => 'WebSite',
+            '@id' => '#website',
+            'url' => $homeUrl,
+            'name' =>  $appTitle,
+        ]); ?></script>
+        
         <!--<link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>-->
-        <link href='style/emby-playlist-app.css' rel='stylesheet' type='text/css'>
+        <link href='<?php echo $homeUrl; ?>/style/emby-playlist-app.css' rel='stylesheet' type='text/css'>
+        <script type='application/javascript' src="<?php echo $homeUrl; ?>/js/keys.js"></script>
     </head>
     <body>
         <header>
             <div>
                 <nav>
-                
+                    <ul>
+        <li><a href="<?php echo $homeUrl; ?>" <?php if($template == 'home'): ?>class="active"<?php endif; ?>>Home</a></li>
+                        <li><a href="<?php echo $homeUrl; ?>/playlists" <?php if($template == 'playlists'): ?>class="active"<?php endif; ?>>Playlists</a></li>
+                        <li><a href="<?php echo $homeUrl; ?>/library" <?php if($template == 'files'): ?>class="active"<?php endif; ?>>Library</a></li>
+                    </ul>
                 </nav>
             </div>
         </header>
 
-        <div id="body">
+        <div id="content">
             <div>
-                <h1>Slim</h1>
-                <div>a microframework for PHP</div>
-
-                <?php if (isset($name)) : ?>
-                    <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-                <?php else: ?>
-                    <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
-                <?php endif; ?>
-
-                <?php if (isset($location)) : ?>
-                    <h3><?= htmlspecialchars($location); ?></h3>
-                <?php endif; ?>
+                <?php 
+                    
+                    require("pages/{$template}.phtml"); 
+                ?>
             </div>
         </div>
 
         <footer>
             <div>
-            
+                Emby Playlist App
             </div>
         </footer>
+
+        <div id="playlist-item-menu" class="right-click-menu">
+            <ul>
+                <li id="playlist-item-menu-remove">Remove from playlist</li>
+            </ul>
+        </div>
+
+        <script type='application/javascript' src="<?php echo $homeUrl; ?>/js/emby-playlist-app.js"></script>
     </body>
 </html>
