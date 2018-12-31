@@ -6,7 +6,9 @@
     $title = isset($title) ? $title . ' | ' . $appTitle : $appTitle;
     $homeUrl = getenv('APPLICATION_ROOT_URL');
 
-    $listNames = PlaylistFile::getPlaylistNames(getenv('PLAYLISTS'));
+    $location = getenv('PLAYLISTS');
+    $listNames = PlaylistFile::getPlaylistNames($location);
+
 
     $template = 'home';
     switch(isset($page) ? $page : false) {
@@ -44,6 +46,7 @@
         <meta name="twitter:site" content="@embyapp" />
         <meta name="twitter:image" content="<?php echo $homeUrl; ?>/images/logo2.png" />
         <meta name="twitter:creator" content="@dmcblue" />
+        
         <!-- Google JSON-LD -->
         <script type='application/ld+json'><?php echo json_encode([
             '@context' =>  'http://schema.org',
@@ -85,12 +88,15 @@
             </div>
         </footer>
 
-        <div id="playlist-item-menu" class="right-click-menu">
-            <ul>
-                <li id="playlist-item-menu-remove">Remove from playlist</li>
-            </ul>
-        </div>
+        <?php
+            if(file_exists(__DIR__ . DIRECTORY_SEPARATOR . "menus/{$template}.phtml")) {
+                require("menus/{$template}.phtml");
+            }
+        ?>
 
+        <div id="message-box"></div>
+
+        <input type="hidden" id="baseUrl" value="<?php echo $homeUrl; ?>" />
         <script type='application/javascript' src="<?php echo $homeUrl; ?>/js/emby-playlist-app.js"></script>
     </body>
 </html>

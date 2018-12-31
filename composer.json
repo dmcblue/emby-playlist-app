@@ -15,7 +15,6 @@
         "slim/slim": "^3.1",
         "slim/php-view": "^2.0",
         "monolog/monolog": "^1.17",
-        "propel/propel": "^2.0@dev",
         "vlucas/phpdotenv": "^2.5@dev",
         "leafo/scssphp": "dev-master"
     },
@@ -36,9 +35,6 @@
         "process-timeout" : 0
     },
     "scripts": {
-        "propel:diff" : ["propel diff"],
-        "propel:migrate" : ["propel migrate"],
-        "propel:build" : ["propel sql:build && propel model:build && composer dump-autoload"],
         "build:styles" : ["php styles/build.php"],
         "start": "php -S localhost:8080 -t public",
         "test": "phpunit --bootstrap vendor/autoload.php tests/Unit"

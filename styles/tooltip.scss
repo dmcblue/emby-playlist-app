@@ -1,6 +1,6 @@
 @import "_vars";
 
-.right-click-menu{
+.right-click-menu {
     position: absolute;
     left: -100%;
     top: -100%;
@@ -9,6 +9,16 @@
 
     background: $backgroundColor;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+
+        > span {
+            font-size: inherit;
+            font-weight: inherit;
+        }
+    }
 
     ul {
         list-style: none;

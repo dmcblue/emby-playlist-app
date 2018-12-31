@@ -1,7 +1,7 @@
 @import "_vars";
 
 nav {
-    border-bottom: 2px solid $headerBackground;
+    /*border-bottom: 2px solid $headerBackground;*/
     ul {
         list-style: none;
 
@@ -11,14 +11,18 @@ nav {
             a {
                 padding: 1em;
                 text-decoration: none;
-                border-bottom: 2px solid $headerBackground;
+                /*border-bottom: 2px solid $headerBackground;*/
+                font-size: 90.15%; /* from emby*/
+                font-weight: $fontWeightBold;
+                color: $textColorDeemphasize;
 
                 &:hover {
                     background: $highlightAreaColor;
                 }
 
                 &.active {
-                    border-bottom: 2px solid $brandColor;
+                    /*border-bottom: 2px solid $brandColor;*/
+                    color: $brandColor;
                 }
             }
         }

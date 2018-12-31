@@ -50,7 +50,6 @@
 }
 
 @mixin button-high-emphasis($foreground-color: blue, $background-color: white, $timing-function: ease) {
-	padding: 3px 8px;
 	color: $background-color;
 	border: 1px solid $foreground-color;
 	background: $foreground-color;

@@ -11,13 +11,6 @@ if (PHP_SAPI == 'cli-server') {
 
 require __DIR__ . '/../vendor/autoload.php';
 
-include(
-	__DIR__.DIRECTORY_SEPARATOR
-		."..".DIRECTORY_SEPARATOR
-		."generated-conf".DIRECTORY_SEPARATOR
-		."config.php"
-);
-
 session_start();
 
 // Instantiate the app

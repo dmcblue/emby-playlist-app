@@ -5,12 +5,19 @@
     padding: 0;
     font-family: $defaultFontFamily;
     font-size: 1rem;
-    font-weight: 400;
-    color: $textColor;
+    font-weight: $fontWeightNormal;
+    color: $textColorDeemphasize;
 }
 
 ul, ol {
     margin-left: 2rem;
+}
+
+.message {
+    color: $brandColor;
+    &.error {
+        color: red;
+    }
 }
 
 #content > div > div {
@@ -31,6 +38,7 @@ ul, ol {
 ul.filelist {
     list-style: none;
     margin-left: 1em;
+    margin-right: 1em;
     @include noselect();
 
     li {

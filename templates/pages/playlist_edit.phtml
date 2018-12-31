@@ -1,5 +1,7 @@
 <?php
     use EmbyPlaylistApp\PlaylistFile;
+
+    $isNew = $playlistName === "";
 ?>
 <div>
     <a class="back" href="<?php echo $homeUrl; ?>/playlists">back...</a>
@@ -8,16 +10,18 @@
 <h1>Edit Playlist</h1>
 
 <?php if(isset($message) && $message):?>
-<div class="message">
+<div class="message <?php if(isset($error) && $error):?>error<?php endif; ?>">
     <?php echo $message; ?>
 </div>
 <?php endif; ?>
 
 <form method="POST" action="<?php echo $homeUrl; ?>/api/playlists" class="playlist-editor">
+    <?php if(!$isNew): ?>
     <div>
         <input type="submit" value="<?php echo strlen($playlistName) ? 'Save' : 'Create'; ?>" class="high-emphasis"/>
-        <a href="<?php echo $homeUrl; ?>/playlists/edit?name=<?php echo $playlistName; ?>" class="button mid-emphasis">Cancel</a>
+        <a href="<?php echo $homeUrl; ?>/playlists" class="button mid-emphasis">Cancel</a>
     </div>
+    <?php endif; ?>
 
     <div>
         <label>Name <input type="text" name="name" value="<?php echo $playlistName; ?>" /></label>
@@ -25,17 +29,19 @@
     </div>
     <?php if(count($files)): ?>
         <h2>Songs</h2>
-        <ul class="playlist filelist">
+        <ul class="playlist filelist selectable">
             <?php $count = 0; foreach($files as $file): ?>
             <li class="playlist-item item<?php echo $count; ?>" data-count="<?php echo $count; ?>"><label><?php 
                 echo str_replace($location, '', $file); 
             ?><input type="hidden" name="files[]" value="<?php echo $file; ?>" /></label></li>
             <?php $count++; endforeach; ?>
         </ul>
+    <?php elseif(!$isNew): ?>
+        <h2>No files</h2>
     <?php endif; ?>
 
     <div>
         <input type="submit" value="<?php echo strlen($playlistName) ? 'Save' : 'Create'; ?>" class="high-emphasis"/>
-        <a href="<?php echo $homeUrl; ?>/playlists/edit?name=<?php echo $playlistName; ?>" class="button mid-emphasis">Cancel</a>
+        <a href="<?php echo $homeUrl; ?>/playlists" class="button mid-emphasis">Cancel</a>
     </div>
 </form>

@@ -18,15 +18,18 @@
     <?php endforeach; ?>
 </ul>
 <?php else: ?>
-<h2>No Child Folders</h2>
+<h2>No Folders</h2>
 <?php endif; ?>
 
 <?php if($contents['files']): ?>
 <h2>Files</h2>
-<ul class="filelist">
-    <?php foreach($contents['files'] as $fileName): ?>
-    <li><?php echo $fileName; ?></li>
-    <?php endforeach; ?>
+<ul class="files filelist selectable">
+    <?php $count = 0; foreach($contents['files'] as $fileName): ?>
+    <li class="item<?php echo $count; ?>" 
+        data-count="<?php echo $count; ?>"
+        data-file="<?php echo implode('/', $path) . '/' . $fileName; ?>"
+        ><?php echo $fileName; ?></li>
+    <?php $count++; endforeach; ?>
 </ul>
 <?php else: ?>
 <h2>No Files</h2>

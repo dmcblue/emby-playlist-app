@@ -9,8 +9,11 @@ $headerBackground: rgb(49, 50, 53);
 $defaultFontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $headerFontFamily: "Krona One", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+$fontWeightNormal: 400;
+$fontWeightBold: 600;
+
 $headerSize1: 2.4rem;
-$headerSize2: 1.6rem;
+$headerSize2: 1.5rem;/* from emby */  /*1.6rem;*/
 $headerSize3: 1.2rem;
 
 $transitionDuration: 0.5s;
