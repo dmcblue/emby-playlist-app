@@ -8,8 +8,6 @@ use EmbyPlaylistApp\PlaylistFile;
 const API_ROOT = '/api';
 
 $app->post(API_ROOT . '/playlists', function (Request $request, Response $response, array $args) {
-    //create new (post/put?/patch)
-
     // Sample log message
     $this->logger->info("Slim-Skeleton '/api/playlists' route");
 
@@ -53,7 +51,7 @@ $app->post(API_ROOT . '/add', function (Request $request, Response $response, ar
 
     if($playlistName && $filePath) {
         $playlist = new PlaylistFile($this->get('settings')['playlistRoot'], $playlistName);
-        //$playlistPath = PlaylistFile::createFileName($this->get('settings')['playlistRoot'], $playlistName);
+        
         if(!$playlist->exists()) {
             $status['status'] = false;
             $status['message'] = "No such playlist '{$playlistName}'";
@@ -90,7 +88,7 @@ $app->post(API_ROOT . '/remove', function (Request $request, Response $response,
 
     if($playlistName && $filePath) {
         $playlist = new PlaylistFile($this->get('settings')['playlistRoot'], $playlistName);
-        //$playlistPath = PlaylistFile::createFileName($this->get('settings')['playlistRoot'], $playlistName);
+        
         if(!$playlist->exists()) {
             $status['status'] = false;
             $status['message'] = "No such playlist '{$playlistName}'";
@@ -107,4 +105,33 @@ $app->post(API_ROOT . '/remove', function (Request $request, Response $response,
     }
 
     return $response->withJson($status);
+});
+
+$app->get(API_ROOT . '/files', function (Request $request, Response $response, array $args) {
+    // Sample log message
+    $this->logger->info("Slim-Skeleton '/api/files' route");
+
+    $file = urldecode($request->getParam('file'));
+    $status = [
+        'status' => true,
+        'message' => ''
+    ];
+
+    if(!$file) {
+        $status['status'] = false;
+        $status['message'] = "Invalid data";
+    } else {
+        $file = $this->get('settings')['libraryBase'] . DIRECTORY_SEPARATOR . $file;
+
+        $playlistRoot = $this->get('settings')['playlistRoot'];
+        $listNames = PlaylistFile::getPlaylistNames($playlistRoot);
+
+        $results = [];
+        foreach($listNames as $listName) {
+            $playlist = new PlaylistFile($playlistRoot, $listName);
+            $results[$listName] = $playlist->hasFile($file);
+        }
+    }
+
+    return $response->withJson(isset($results) ? $results : $status);
 });

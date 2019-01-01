@@ -26,6 +26,33 @@ var EmbyPlaylistApp = EmbyPlaylistApp || {
             return EmbyPlaylistApp.Api._endPoint;
         },
 
+        get: function(url, data, onReponse) {//encodeURI()
+            var xhr = new XMLHttpRequest();
+
+            if(data) {
+                //only handles one level of depth
+                query = new URLSearchParams();
+                for(name in data) {
+                    query.set(name, data[name]);
+                }
+                url += '?' + query.toString();
+            }
+
+            xhr.open('GET', url, true);
+            if(onReponse) {
+                xhr.onreadystatechange = (function(onResponse) {
+                    return function(){
+                        if(this.readyState == 4) {
+                            var response = JSON.parse(this.response);
+                            onResponse(response);
+                        }
+                    }
+                })(onReponse);
+            }
+
+            xhr.send(null);
+        },
+
         post: function(url, data, onReponse) {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
@@ -117,7 +144,7 @@ var EmbyPlaylistApp = EmbyPlaylistApp || {
     Message: {
         boxId: 'message-box',
         showClass: 'show',
-        time: 100, //ms,
+        time: 100, //ms
         factor: 0.05,
 
         fade: function() {
@@ -215,9 +242,10 @@ window.addEventListener('load', function() {
     var playlistItems = document.querySelectorAll('.playlist-item');
     for(item of playlistItems) {
         item.addEventListener('contextmenu', function(event) {
-            var checkedItems = this.parentNode.querySelectorAll('.' + EmbyPlaylistApp.itemSelectedClass);
-            if(checkedItems.length === 0) {
+            if(!EmbyPlaylistApp.Class.has(this, EmbyPlaylistApp.itemSelectedClass)) {
+                EmbyPlaylistApp.Playlist.deselectAll();
                 EmbyPlaylistApp.Class.add(this, EmbyPlaylistApp.itemSelectedClass);
+                EmbyPlaylistApp.lastItemSelected = this.dataset.count;
             }
 
             EmbyPlaylistApp.Menu.call(event, 'playlist-item-menu');
@@ -237,6 +265,12 @@ window.addEventListener('load', function() {
     var filelistItems = document.querySelectorAll('.files.filelist.selectable li');
     for(item of filelistItems) {
         item.addEventListener('contextmenu', function(event) {
+            if(!EmbyPlaylistApp.Class.has(this, EmbyPlaylistApp.itemSelectedClass)) {
+                EmbyPlaylistApp.Playlist.deselectAll();
+                EmbyPlaylistApp.Class.add(this, EmbyPlaylistApp.itemSelectedClass);
+                EmbyPlaylistApp.lastItemSelected = this.dataset.count;
+            }
+
             var checkedItems = this.parentNode.querySelectorAll('.' + EmbyPlaylistApp.itemSelectedClass);
             if(checkedItems.length > 1) {
                 document.getElementById('filelist-item-menu-multi-num').textContent = checkedItems.length;
@@ -246,8 +280,29 @@ window.addEventListener('load', function() {
                 if(checkedItems.length === 0) {
                     EmbyPlaylistApp.Class.add(this, EmbyPlaylistApp.itemSelectedClass);
                 }
-
+                var menu = document.getElementById('filelist-item-menu-single');
+                var load = menu.querySelector('.load');
+                load.style.display = "block";
+                var ul = menu.querySelector('ul');
+                ul.style.display = "none";
                 EmbyPlaylistApp.Menu.call(event, 'filelist-item-menu-single');
+
+                EmbyPlaylistApp.Api.get(
+                    EmbyPlaylistApp.Api.endPoint() + 'files', 
+                    {
+                        file: encodeURI(this.dataset.file)
+                    }, 
+                    function(response){
+                        var inputs = ul.querySelectorAll('.filelist-item-menu-manage-input');
+
+                        for(input of inputs) {
+                            input.checked = response[input.value];
+                        }
+
+                        load.style.display = "none";
+                        ul.style.display = "block";
+                    }
+                );
             }
         });
     }
@@ -272,7 +327,6 @@ window.addEventListener('load', function() {
             var checkedItems = document.querySelectorAll('.' + EmbyPlaylistApp.itemSelectedClass);
 
             for(checkedItem of checkedItems) {
-                console.log(this, this.dataset);
                 EmbyPlaylistApp.Api.add(this.dataset.listname, checkedItem.dataset.file);
             }
 

@@ -54,3 +54,17 @@ ul.filelist {
         }
     }
 }
+
+#filelist-item-menu-single {
+    label {
+        display: block;
+
+        &:before {
+            float: right;
+        }
+
+        &:after {
+            clear: both;
+        }
+    }
+}

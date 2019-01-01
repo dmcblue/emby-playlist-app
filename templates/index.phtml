@@ -76,8 +76,7 @@
         <div id="content">
             <div>
                 <?php 
-                    
-                    require("pages/{$template}.phtml"); 
+                    require(implode(DIRECTORY_SEPARATOR, [__DIR__, 'pages', "{$template}.phtml"]));
                 ?>
             </div>
         </div>
@@ -89,6 +88,7 @@
         </footer>
 
         <?php
+            $path = implode(DIRECTORY_SEPARATOR, [__DIR__, 'menus', "{$template}.phtml"]);
             if(file_exists(__DIR__ . DIRECTORY_SEPARATOR . "menus/{$template}.phtml")) {
                 require("menus/{$template}.phtml");
             }
