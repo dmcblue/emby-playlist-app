@@ -1,0 +1,18 @@
+@import "_vars";
+
+#message-box {
+    position: fixed;
+    top: -100%;
+    z-index: 99;
+    opacity: 0;
+
+    background: $backgroundColor;
+    padding: 1em;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+    &.show {
+        top: 4em;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

@@ -1,0 +1,21 @@
+<div id="filelist-item-menu-multi" class="right-click-menu">
+    <h3>Add <span id="filelist-item-menu-multi-num">1</span> item(s) to: </h3>
+    <ul>
+        <?php foreach($listNames as $listName): ?>
+        <li class="filelist-item-menu-add" data-listName="<?php echo $listName; ?>"><?php echo $listName; ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<div id="filelist-item-menu-single" class="right-click-menu">
+    <h3>Manage Playlists: </h3>
+    <?php require(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'components', 'load.phtml'])); ?>
+    <ul>
+        <?php $count = 0; foreach($listNames as $listName): ?>
+        <li class="filelist-item-menu-manage checkbox" data-listname="<?php echo $listName; ?>">
+            <input id="filelist-item-menu-manage<?php echo $count; ?>" class="filelist-item-menu-manage-input" type="checkbox" value="<?php echo $listName; ?>" />
+            <label class="checkbox" for="filelist-item-menu-manage<?php echo $count; ?>"><?php echo $listName; ?></label>
+        </li>
+        <?php $count++; endforeach; ?>
+    </ul>
+</div>

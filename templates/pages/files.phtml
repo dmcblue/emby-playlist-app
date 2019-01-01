@@ -1,28 +1,39 @@
+<?php 
+    $backRef = "";
+    if($isRoot) {
+        $backRef = $homeUrl;
+    } else {
+        $backRef = "?" . http_build_query(['path' => array_slice($path, 0, count($path) - 1)]);
+    }
+?>
 <div>
-    <a class="back" href="<?php echo $homeUrl; ?>">back...</a>
+    <a class="back" href="<?php echo $backRef; ?>">back...</a>
 </div>
 
 <h1>Library</h1>
 
 <?php if(!$isRoot): ?>
 <div>
-    <a href="?<?php echo http_build_query(['path' => array_slice($path, 0, count($path) - 1)]); ?>">Back</a>
+    <a href="?path=">Root</a>
+    <?php foreach($path as $index => $p): ?>
+    / <a href="?<?php echo http_build_query(['path' => array_slice($path, 0, $index + 1)]); ?>"><?php echo $p; ?></a>
+    <?php endforeach; ?>
 </div>
 <?php endif; ?>
 
-<?php if($contents['directories']): ?>
 <h2>Folders</h2>
+<?php if($contents['directories']): ?>
 <ul class="filelist">
     <?php foreach($contents['directories'] as $dirName): ?>
     <li><a href="?<?php echo http_build_query(['path' => array_merge($path, [$dirName])]); ?>"><?php echo $dirName; ?></a></li>
     <?php endforeach; ?>
 </ul>
 <?php else: ?>
-<h2>No Folders</h2>
+<p class="none">None</p>
 <?php endif; ?>
 
-<?php if($contents['files']): ?>
 <h2>Files</h2>
+<?php if($contents['files']): ?>
 <ul class="files filelist selectable">
     <?php $count = 0; foreach($contents['files'] as $fileName): ?>
     <li class="item<?php echo $count; ?>" 
@@ -32,5 +43,5 @@
     <?php $count++; endforeach; ?>
 </ul>
 <?php else: ?>
-<h2>No Files</h2>
+<p class="none">None</p>
 <?php endif; ?>

@@ -1,0 +1,50 @@
+@import "_vars";
+
+.load.big {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+
+    .square {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+
+        background: $highlightAreaColor;
+
+        animation-duration: 4s;
+        animation-name: load_square_move;
+        animation-iteration-count: infinite;
+
+        &:first-child {
+            animation-delay: -2s;
+        }
+    }
+}
+
+@keyframes load_square_move {
+    from {
+        top: 0;
+        left: 0; 
+    }
+  
+    25% {
+        top: 0;
+        left: 2rem; 
+    }
+
+    50% {
+        top: 2rem;
+        left: 2rem; 
+    }
+
+    75% {
+        top: 2rem;
+        left: 0; 
+    }
+
+    to {
+        top: 0;
+        left: 0;
+    }
+  }
