@@ -1,5 +1,5 @@
 # emby-playlist-app
-Web app you can locally host on the same server as your Emby setup to more easily create playlists.
+Web app you can locally host on the same server as your [Emby](https://emby.media/) setup to more easily create audio playlists.
 
 ## Features
 
