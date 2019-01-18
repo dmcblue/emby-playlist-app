@@ -16,7 +16,7 @@ $app->post(API_ROOT . '/playlists', function (Request $request, Response $respon
     $parsedBody = $request->getParsedBody();
     $playlist = new PlaylistFile($root, $parsedBody['name']);
     if($parsedBody['original_name'] != $parsedBody['name']) {
-        if($newList->exits()) {
+        if($playlist->exists()) {
             //throw name already in use error
             return $response->withRedirect(getenv('APPLICATION_ROOT_URL') . "/playlists/edit?name={$parsedBody['name']}&message=Error+Name+In+Use&error=1");
         }
