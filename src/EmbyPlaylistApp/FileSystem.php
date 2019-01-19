@@ -10,9 +10,17 @@ class FileSystem {
 		$dirs = array();
 		foreach($contents as $path){
 			if(is_dir(utf8_decode($root)."\\".$path)){
-				$dirs[] = utf8_encode($path);
+				$dirs[] = $path;
+				//$dirs[] = utf8_encode($path);
 			}else{
-				$files[] = utf8_encode($path);
+				/*
+				 * On Windows, non-ASCII strings are being detected as 'UTF-8'
+				 * not "Windows-1252"...
+				 * mb_detect_encoding($path);
+				 */
+				$files[] = $path;
+				//$files[] = utf8_encode($path);
+				//$files[] = mb_convert_encoding($path, "Windows-1252", "UTF-8");
 			}
 		}
 

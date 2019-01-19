@@ -38,7 +38,7 @@
     <?php $count = 0; foreach($contents['files'] as $fileName): ?>
     <li class="item<?php echo $count; ?>" 
         data-count="<?php echo $count; ?>"
-        data-file="<?php echo implode('/', $path) . '/' . $fileName; ?>"
+        data-file="<?php echo implode('/', array_merge($path, [$fileName])); ?>"
         ><?php echo $fileName; ?></li>
     <?php $count++; endforeach; ?>
 </ul>
