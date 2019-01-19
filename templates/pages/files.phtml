@@ -25,7 +25,14 @@
 <?php if($contents['directories']): ?>
 <ul class="filelist">
     <?php foreach($contents['directories'] as $dirName): ?>
-    <li><a href="?<?php echo http_build_query(['path' => array_merge($path, [$dirName])]); ?>"><?php echo $dirName; ?></a></li>
+    <li><a href="?<?php echo http_build_query(['path' => 
+        array_map(
+            function($part){
+                return urlencode($part);
+            },
+            array_merge($path, [$dirName])
+        )
+    ]); ?>"><?php echo $dirName; ?></a></li>
     <?php endforeach; ?>
 </ul>
 <?php else: ?>

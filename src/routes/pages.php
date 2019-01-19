@@ -20,10 +20,17 @@ $app->get('/library', function (Request $request, Response $response, array $arg
 
     $args['page'] = 'files';
 
-    $args['path'] = is_array($request->getParam('path')) ? $request->getParam('path') : [];
-    $currentPath = $this->get('settings')['libraryBase'] . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $args['path']);
+    $args['path'] = array_map(
+        function($part){return urldecode($part);},
+        (is_array($request->getParam('path')) ? $request->getParam('path') : [])
+    );
+    
+    $currentPath = 
+        $this->get('settings')['libraryBase'] . DIRECTORY_SEPARATOR 
+        . implode(DIRECTORY_SEPARATOR, $args['path']);
+    
     $args['contents'] = FileSystem::getDirectoryContents($currentPath);
-
+    
     $args['isRoot'] = count($args['path']) === 0;
 
     // Render index view

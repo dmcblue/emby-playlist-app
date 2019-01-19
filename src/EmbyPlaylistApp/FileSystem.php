@@ -4,7 +4,7 @@ namespace EmbyPlaylistApp;
 
 class FileSystem {
 	public static function getDirectoryContents($root) {
-		$contents = array_diff(scandir(utf8_decode($root)), array('..', '.'));
+		$contents = array_diff(scandir($root), array('..', '.'));
 
 		$files = array();
 		$dirs = array();
