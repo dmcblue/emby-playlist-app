@@ -9,7 +9,7 @@ class FileSystem {
 		$files = array();
 		$dirs = array();
 		foreach($contents as $path){
-			if(is_dir(utf8_decode($root)."\\".$path)){
+			if(is_dir(utf8_decode($root).DIRECTORY_SEPARATOR.$path)){
 				$dirs[] = $path;
 				//$dirs[] = utf8_encode($path);
 			}else{
