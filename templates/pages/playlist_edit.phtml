@@ -4,7 +4,7 @@
     $isNew = $playlistName === "";
 ?>
 <div>
-    <a class="back" href="<?php echo $homeUrl; ?>/playlists">back...</a>
+    <a class="back" href="<?php echo $homeUrl; ?>/playlists" tabindex="4">back...</a>
 </div>
 
 <h1>Edit Playlist</h1>
@@ -24,7 +24,7 @@
     <?php endif; ?>
 
     <div>
-        <label>Name <input type="text" name="name" value="<?php echo $playlistName; ?>" /></label>
+        <label>Name <input type="text" name="name" value="<?php echo $playlistName; ?>" tabindex="1" /></label>
         <input type="hidden" name="original_name" value="<?php echo $playlistName; ?>" />
     </div>
     <?php if(count($files)): ?>
@@ -41,7 +41,7 @@
     <?php endif; ?>
 
     <div>
-        <input type="submit" value="<?php echo strlen($playlistName) ? 'Save' : 'Create'; ?>" class="high-emphasis"/>
-        <a href="<?php echo $homeUrl; ?>/playlists" class="button mid-emphasis">Cancel</a>
+        <input type="submit" value="<?php echo strlen($playlistName) ? 'Save' : 'Create'; ?>" class="high-emphasis" tabindex="2"/>
+        <a href="<?php echo $homeUrl; ?>/playlists" class="button mid-emphasis" tabindex="3">Cancel</a>
     </div>
 </form>
