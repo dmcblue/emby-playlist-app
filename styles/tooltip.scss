@@ -2,12 +2,14 @@
 
 .right-click-menu {
     position: absolute;
-    left: -100%;
-    top: -100%;
 
     z-index: 100;
 
+	max-height: 80vh;
+	overflow-y: auto;
+
     background: $backgroundColor;
+	border: 1px solid lighten($backgroundColor, 5%);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 
     h1, h2, h3, h4, h5, h6 {

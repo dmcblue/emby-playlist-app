@@ -128,13 +128,27 @@ var EmbyPlaylistApp = EmbyPlaylistApp || {
             event.stopPropagation();
             
             var menu = document.getElementById(menuId);
-            menu.style.top = event.pageY + 'px';
-            menu.style.left = event.pageX + 'px';
+            menu.style.top = '-10000px';
+			menu.style.display = 'block';
+			// height isn't fully loaded when this is run, wait
+			setTimeout(function() {
+				var menuHeight = menu.clientHeight;
+				var menuBottom = event.pageY + menuHeight;
+				var top = event.pageY;
+				// check if menu goes below the page, pull up if so
+				if (menuBottom > window.innerHeight) {
+					top = top - (menuBottom - window.innerHeight);
+				}
+				menu.style.top = top + 'px';
+				menu.style.left = event.pageX + 'px';
+			}, 200);
+			// ^ doesn't work the first time :(
         },
 
         hideAll: function () {
             var items = document.querySelectorAll('.right-click-menu');
             for(item of items) {
+				item.style.display = 'none';
                 item.style.top = '-100%';
                 item.style.left = '-100%';
             }
@@ -334,4 +348,5 @@ window.addEventListener('load', function() {
             EmbyPlaylistApp.Menu.hideAll();
         });
     }
+    EmbyPlaylistApp.Menu.hideAll();
 })
